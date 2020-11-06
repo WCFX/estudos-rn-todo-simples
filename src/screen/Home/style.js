@@ -25,7 +25,18 @@ const style = StyleSheet.create({
     fontSize: 18,
     height: 50,
   },
-  button:{
+  btnPress:{
+    width: 150,
+    height: 50,
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderRadius: 8,
+    backgroundColor: '#156eee',
+    borderColor: '#156eee',
+  },
+  btnNormal: {
     width: 150,
     height: 50,
     marginVertical: 10,
@@ -50,12 +61,14 @@ const style = StyleSheet.create({
     flex: 1,
     width: 300,
     paddingVertical: 20,
+    paddingHorizontal: 30,
     borderWidth: 1,
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 6,
     borderColor: '#156e',
+    backgroundColor: '#2d2c2a'
   },
   item: {
     fontSize: 22,

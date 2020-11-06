@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 
 import styles from './style';
-
 
 const Home = () => {
 
   const [ingredient, setIngredient] = useState('');
-
+  const [ isPress, setIsPress ] = useState(false);
   const [list, setList ] = useState([]);
 
   const handleSubmit = () => {
@@ -17,6 +16,16 @@ const Home = () => {
       setIngredient('');
     }
   };
+
+  const buttonProps = {
+    activeOpacity: 1,
+    underlayColor: '#022442',
+    style: isPress ? styles.btnPress : styles.btnNormal, // <-- but you can still apply other style changes
+    onHideUnderlay: () => setIsPress(false),
+    onShowUnderlay: () => setIsPress(true),
+    onPress: (event) => handleSubmit(event)
+
+  }
 
   const handleRenderIngredient = ({ item }) => {
     return(
@@ -37,12 +46,9 @@ const Home = () => {
         value={ingredient}
         onChangeText={setIngredient}
       />
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={handleSubmit}  
-      >
+      <TouchableHighlight {...buttonProps}>
         <Text style={styles.buttonText}>Adicionar</Text>
-      </TouchableOpacity>
+      </TouchableHighlight>
       <FlatList
         data={list}
         keyExtractor={item => item}
