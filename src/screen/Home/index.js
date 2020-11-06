@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
-import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
+import { Feather } from '@expo/vector-icons';
+import { BorderlessButton, FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 
 import styles from './style';
 
@@ -16,6 +17,10 @@ const Home = () => {
       setIngredient('');
     }
   };
+
+  const cleanInput = () => {
+    setIngredient('')
+  }
 
   const buttonProps = {
     activeOpacity: 1,
@@ -33,22 +38,35 @@ const Home = () => {
         <Text style={styles.item}>{item}</Text>
       </View>
     )
-  } 
-    
+  }
+
   return(
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Faça um Bolo</Text>
-      <TextInput
-        autoCompleteType="off"
-        autoCorrect={false}
-        style={styles.input}
-        placeholder="Digite um ingrediente"
-        value={ingredient}
-        onChangeText={setIngredient}
-      />
-      <TouchableHighlight {...buttonProps}>
-        <Text style={styles.buttonText}>Adicionar</Text>
-      </TouchableHighlight>
+      <Text style={styles.title}>Faça uma Receita</Text>
+      
+      <View style={styles.containerInput}>
+
+        <TextInput
+          autoCompleteType="off"
+          autoCorrect={false}
+          style={styles.input}
+          placeholder="Digite um ingrediente"
+          value={ingredient}
+          onChangeText={setIngredient}
+        />
+
+        <BorderlessButton 
+          onPress={cleanInput}
+          style={styles.cleanButton}
+        >
+          <Feather name="x" size={24} color="#000" />
+        </BorderlessButton>
+
+      </View>
+        <TouchableHighlight {...buttonProps}>
+          <Text style={styles.buttonText}>Adicionar</Text>
+        </TouchableHighlight>
+
       <FlatList
         data={list}
         keyExtractor={item => item}
