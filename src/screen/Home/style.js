@@ -12,7 +12,7 @@ const style = StyleSheet.create({
     fontSize: 32,
     marginVertical: 20,
     fontFamily: 'Nunito_700Bold',
-    color: '#156eee',
+    color: 'rgb(63,94,251)',
     textAlign: 'center',
   },
   containerInput: {
@@ -31,7 +31,7 @@ const style = StyleSheet.create({
     borderColor: "#000",
     borderRadius: 10,
     marginLeft: 5,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
   },
   input: {
     backgroundColor: '#FFF',
@@ -45,13 +45,11 @@ const style = StyleSheet.create({
   },
   
   btnPress:{
-    width: 150,
-    height: 50,
+    width: 165,
+    height: 55,
     marginVertical: 10,
     borderWidth: 1,
     borderRadius: 8,
-    backgroundColor: '#156eee',
-    borderColor: '#156eee',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -61,8 +59,8 @@ const style = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 1,
     borderRadius: 8,
-    backgroundColor: '#156eee',
-    borderColor: '#156eee',
+    backgroundColor: 'rgb(63,94,251)',
+    borderColor: 'rgb(63,94,251)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -71,29 +69,64 @@ const style = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Nunito_700Bold',
   },
-
   listText:{
     fontSize: 20,
     color: '#FFF',
+    fontFamily: 'Poppins_400Regular',
   },
   containerItem: {
-    flex: 1,
     width: 300,
+    borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderWidth: 1,
-    borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 6,
-    borderColor: '#156e',
-    backgroundColor: '#2d2c2a'
+  },
+  btnItem:{
+    width: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'rgba(63,94,251,0.4)'
   },
   item: {
     fontSize: 22,
     color: '#F9f9f9',
     fontFamily: 'Poppins_400Regular',
   },
+  containerModalize:{
+    flex: 1,
+    height: 180,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  msgModalize: {
+    fontSize: 22,
+    fontFamily: 'Poppins_400Regular',
+    marginBottom: 10,
+  },
+  btnDelete:{
+    backgroundColor: '#fc466b',
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    marginRight: 10,
+    elevation: 11,
+
+  },
+  btnModalizeText: {
+    color: '#FFF',
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 22,
+  }
+
   
 });
 

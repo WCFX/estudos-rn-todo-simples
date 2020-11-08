@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import 'react-native-gesture-handler';
+import { Modalize } from 'react-native-modalize';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { BorderlessButton, FlatList, TouchableHighlight } from 'react-native-gesture-handler';
@@ -7,6 +9,7 @@ import styles from './style';
 
 const Home = () => {
 
+  const modalizeRef = useRef(null);
   const [ingredient, setIngredient] = useState('');
   const [ isPress, setIsPress ] = useState(false);
   const [list, setList ] = useState([]);
@@ -20,7 +23,11 @@ const Home = () => {
 
   const cleanInput = () => {
     setIngredient('')
-  }
+  };
+
+  const openModal = () => {
+    modalizeRef.current?.open();
+  }; 
 
   const buttonProps = {
     activeOpacity: 1,
@@ -29,16 +36,18 @@ const Home = () => {
     onHideUnderlay: () => setIsPress(false),
     onShowUnderlay: () => setIsPress(true),
     onPress: (event) => handleSubmit(event)
-
-  }
+  };
 
   const handleRenderIngredient = ({ item }) => {
     return(
-      <View style={styles.containerItem}>
-        <Text style={styles.item}>{item}</Text>
-      </View>
+        <View style={styles.containerItem}>
+          <TouchableHighlight style={styles.btnItem} onPress={openModal}>
+            <Text style={styles.item}>{item}</Text>
+          </TouchableHighlight>
+        </View>
     )
-  }
+  };
+
 
   return(
     <SafeAreaView style={styles.container}>
@@ -54,7 +63,7 @@ const Home = () => {
           value={ingredient}
           onChangeText={setIngredient}
         />
-
+        
         <BorderlessButton 
           onPress={cleanInput}
           style={styles.cleanButton}
@@ -63,9 +72,21 @@ const Home = () => {
         </BorderlessButton>
 
       </View>
+
         <TouchableHighlight {...buttonProps}>
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableHighlight>
+
+      <Modalize ref={modalizeRef} snapPoint={180}>
+        <View style={styles.containerModalize}>
+
+          <Text style={styles.msgModalize}>Você quer excluir a tarefa?</Text>
+          <TouchableHighlight onPress={() => {}} style={styles.btnDelete}>
+            <Text style={styles.btnModalizeText}>EXCLUIR</Text>
+          </TouchableHighlight>
+        </View>
+      </Modalize>
+
 
       <FlatList
         data={list}

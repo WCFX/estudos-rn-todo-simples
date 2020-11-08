@@ -5,7 +5,7 @@ import { Nunito_400Regular,Nunito_600SemiBold,Nunito_700Bold } from '@expo-googl
 import { Poppins_400Regular,Poppins_600SemiBold,Poppins_700Bold } from '@expo-google-fonts/poppins';
 import { Archivo_400Regular,Archivo_600SemiBold,Archivo_700Bold} from '@expo-google-fonts/archivo';
 
-import Routes from './src/routes/routes';
+import Routes from './src/routes';
 
 export default function App() {
 
