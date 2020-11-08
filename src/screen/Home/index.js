@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import { Modalize } from 'react-native-modalize';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { BorderlessButton, FlatList, TouchableHighlight } from 'react-native-gesture-handler';
+import { BorderlessButton, FlatList, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './style';
 
@@ -11,8 +11,9 @@ const Home = () => {
 
   const modalizeRef = useRef(null);
   const [ingredient, setIngredient] = useState('');
-  const [ isPress, setIsPress ] = useState(false);
-  const [list, setList ] = useState([]);
+  const [isPress, setIsPress] = useState(false);
+  const [list, setList] = useState([]);
+  const [deleteIngredient, setDeleteIngredient] = useState('');
 
   const handleSubmit = () => {
     if(ingredient.trim()){
@@ -21,11 +22,18 @@ const Home = () => {
     }
   };
 
+  const handleDeleteItem = (item) => {
+    setList(list.filter((ingredients) => ingredients !== item));
+    modalizeRef.current?.close();
+    console.log(item);
+  };
+
   const cleanInput = () => {
     setIngredient('')
   };
 
-  const openModal = () => {
+  const openModal = async (item) => {
+    await setDeleteIngredient(item);
     modalizeRef.current?.open();
   }; 
 
@@ -37,17 +45,6 @@ const Home = () => {
     onShowUnderlay: () => setIsPress(true),
     onPress: (event) => handleSubmit(event)
   };
-
-  const handleRenderIngredient = ({ item }) => {
-    return(
-        <View style={styles.containerItem}>
-          <TouchableHighlight style={styles.btnItem} onPress={openModal}>
-            <Text style={styles.item}>{item}</Text>
-          </TouchableHighlight>
-        </View>
-    )
-  };
-
 
   return(
     <SafeAreaView style={styles.container}>
@@ -77,21 +74,28 @@ const Home = () => {
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableHighlight>
 
-      <Modalize ref={modalizeRef} snapPoint={180}>
+      <Modalize ref={modalizeRef} snapPoint={180} tapGestureEnabled={false}>
         <View style={styles.containerModalize}>
-
           <Text style={styles.msgModalize}>Você quer excluir a tarefa?</Text>
-          <TouchableHighlight onPress={() => {}} style={styles.btnDelete}>
+
+          <TouchableHighlight onPress={() => handleDeleteItem(deleteIngredient)} style={styles.btnDelete}>
             <Text style={styles.btnModalizeText}>EXCLUIR</Text>
           </TouchableHighlight>
         </View>
       </Modalize>
 
-
       <FlatList
         data={list}
-        keyExtractor={item => item}
-        renderItem={handleRenderIngredient}
+        keyExtractor={item => String(item)}
+        renderItem={({item, index}) => {
+          return (
+            <View style={styles.containerItem} key={index}>
+            <TouchableHighlight style={styles.btnItem} onPress={() => openModal(item)}>
+              <Text style={styles.item}>{item}</Text>
+            </TouchableHighlight>
+          </View>
+          )
+        }}
       />
     </SafeAreaView>
   )
